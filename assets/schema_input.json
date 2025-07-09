@@ -1,0 +1,52 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://raw.githubusercontent.com/papaemmelab/nf-proteinactivity/master/assets/schema_input.json",
+    "title": "nf-proteinactivity pipeline - params.input schema",
+    "description": "Schema for the file provided with params.input",
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "sample": {
+                "type": "string",
+                "pattern": "^\\S+$",
+                "errorMessage": "Sample name must be provided and cannot contain spaces",
+                "meta": ["id"]
+            },
+            "reference": {
+                "type": "string",
+                "pattern": "^\\S+$",
+                "errorMessage": "Reference name must be provided and cannot contain spaces",
+                "meta": ["reference"]
+            },
+            "network": {
+                "type": "string",
+                "pattern": "^\\S+$",
+                "errorMessage": "Network name must be provided and cannot contain spaces",
+                "meta": ["network"]
+            },
+            "sample_path": {
+                "type": "string",
+                "format": "file-path",
+                "exists": true,
+                "pattern": "^\\S+$",
+                "errorMessage": "Sample filepath must be provided and cannot contain spaces"
+            },
+            "reference_path": {
+                "type": "string",
+                "format": "file-path",
+                "exists": true,
+                "pattern": "^\\S+$",
+                "errorMessage": "Reference filepath must be provided and cannot contain spaces"
+            },
+            "network_path": {
+                "type": "string",
+                "format": "file-path",
+                "exists": true,
+                "pattern": "^\\S+$",
+                "errorMessage": "Network filepath must be provided and cannot contain spaces"
+            }
+        },
+        "required": ["sample", "reference", "network", "sample_path", "reference_path", "network_path"]
+    }
+}
