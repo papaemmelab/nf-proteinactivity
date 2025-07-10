@@ -41,10 +41,8 @@
             },
             "network_path": {
                 "type": "string",
-                "format": "file-path",
-                "exists": true,
                 "pattern": "^\\S+$",
-                "errorMessage": "Network filepath must be provided and cannot contain spaces"
+                "errorMessage": "Network filepath or directory path must be provided and cannot contain spaces"
             }
         },
         "required": ["sample", "reference", "network", "sample_path", "reference_path", "network_path"]
