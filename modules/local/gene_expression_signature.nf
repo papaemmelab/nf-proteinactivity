@@ -1,4 +1,5 @@
 process GENE_EXPRESSION_SIGNATURE {
+    publishDir "${params.outdir}", mode: "copy"
     tag "${meta.id}|${meta.reference}"
     label 'process_medium'
 

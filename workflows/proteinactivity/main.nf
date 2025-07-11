@@ -6,6 +6,7 @@
 
 include { GENE_EXPRESSION_SIGNATURE } from '../../modules/local/gene_expression_signature.nf'
 include { VIPER                     } from '../../modules/local/viper'
+include { CONVERT_ENTREZ_TO_GENE    } from '../../modules/local/convert_entrez_to_gene.nf'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -99,6 +100,8 @@ workflow PROTEINACTIVITY_SINGLE_SAMPLE {
       .set { ch_viper_inputs }
 
     VIPER(ch_viper_inputs)
+    ch_viper_outputs = VIPER.out.viper_matrix
+    CONVERT_ENTREZ_TO_GENE(ch_viper_outputs)
 }
 
 /*

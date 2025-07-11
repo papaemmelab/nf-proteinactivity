@@ -12,6 +12,7 @@ exp_mat\$tmp <- exp_mat\$Unstranded
 
 # Custom Regulon Loading
 rda2list <- function(file) {
+    print(paste("Loading regulon from:", file))
     e <- new.env()
     load(file, envir = e)
     pruneRegulon(e\$regul, cutoff = 100)
@@ -32,6 +33,13 @@ if (!file.exists(network_path)) {
 vpres <- viper(exp_mat, regul_obj, verbose = TRUE)
 colnames(vpres)[1] <- "${meta.id}"
 vpres <- vpres[, "${meta.id}", drop=FALSE]
+vpres <- as.data.frame(vpres)
+
+# Compute one-tailed p-values and apply Bonferroni correction
+scores <- vpres[, 1]
+pvals <- p.adjust(pnorm(scores, lower.tail = FALSE), method = "bonferroni")
+logp <- -log10(pvals)
+vpres\$pval <- pvals
 
 # Output result
 output_file <- file.path("${meta.id}.${meta.reference}.${meta.network}.viper_matrix.tsv")

@@ -3,7 +3,6 @@ process VIPER {
     label 'process_single'
 
     conda "${moduleDir}/environment.yml"
-    container 'papaemmelab/viper'
 
     input:
     tuple val(meta), path(expression_matrix), path(network)
