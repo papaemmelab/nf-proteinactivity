@@ -1,8 +1,22 @@
 #!/usr/bin/env python3
 
+import random
 import argparse
 import pandas as pd
 import mygene
+
+def safe_querymany(mg, ids, retries=3, wait=None):
+    if not wait:
+        # gets a random wait time between 15 sec and 2 minutes
+        wait = random.uniform(15, 120)
+    for attempt in range(retries):
+        try:
+            return mg.querymany(ids, scopes='entrezgene', fields='symbol', species='human')
+        except Exception as e:
+            if attempt < retries - 1:
+                time.sleep(wait)
+            else:
+                raise e
 
 def convert_entrez_to_genes(entrez_file):
     """
@@ -21,11 +35,9 @@ def convert_entrez_to_genes(entrez_file):
     
     # Query MyGene.info to map Entrez → Gene Symbols
     mg = mygene.MyGeneInfo()
-    query_result = mg.querymany(
+    query_result = safe_querymany(
+        mg,
         df["EntrezID"].tolist(),
-        scopes='entrezgene',
-        fields='symbol',
-        species='human'
     )
     
     # Build mapping dict
