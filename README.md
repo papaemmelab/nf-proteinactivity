@@ -11,12 +11,6 @@ Tool for generating gene expression signature and running viper for protein acti
 - [🧬 nf-proteinactivity](#-nf-proteinactivity)
   - [Contents](#contents)
   - [🚀 Run Pipeline](#-run-pipeline)
-    - [1. ⚡️ Full pipeline](#1-️-full-pipeline)
-    - [2. ✏️ Preprocessing Variants](#2-️-preprocessing-variants)
-      - [Example](#example)
-      - [⚡️ Optional Speed Improvements](#️-optional-speed-improvements)
-    - [3. 🔮 Classifying Artifacts](#3--classifying-artifacts)
-    - [4. 🧠 Training/Retraining](#4--trainingretraining)
   - [Contributing](#contributing)
 
 
